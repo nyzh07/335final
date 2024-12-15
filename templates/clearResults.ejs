@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Clear</title>
+    </head>
+
+    <body>
+        <h1>Clear Search History</h1>
+        <form action="/clearResults" method="post" onsubmit="return confirmation()">
+            <input type="submit" value="Remove All Applicants"><hr>
+            <a href="/">HOME</a></li>
+        </form>
+
+        <script>
+            function confirmation() {
+                return window.confirm("Are you sure you want to remove all recently searched shows and movies?");
+            }
+        </script>
+    </body>
+</html>
