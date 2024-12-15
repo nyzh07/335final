@@ -104,10 +104,10 @@ router.get("/previousResults", async (req, res) => {
             if (result.plot != undefined) {
                 plot_list.push(result);
             } else {
+                result.source_names  = result.source_names.join(", ");
                 source_list.push(result);
             }
         })
-        console.log(plot_list);
         res.render("previousResults", { plot_list, source_list });
     } catch (e) {
         console.error(e);
