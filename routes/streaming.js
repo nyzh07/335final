@@ -9,6 +9,7 @@ const databaseAndCollection = {db: process.env.MONGO_DB_NAME, collection: proces
 
 // Router stuff
 const express = require("express");
+const { info } = require("console");
 const router = express.Router();
 
 router.get("/plotSearch", (req, res) => {
@@ -20,22 +21,16 @@ router.post("/plotSearch", async (req, res) => {
     let title_id, plot, title_name;
     // get Watchman title id
     const id_url = `https://api.watchmode.com/v1/search/?apiKey=${process.env.API_KEY}&search_field=name&search_value=${title}`;
-    fetch(id_url, {method: 'get'})
-        .then(res => res.json())
-        .then(data => {
-            title_id = data.title_results[0]?.id;
-        })
-        .catch(error => console.error('Fetch error', error));
+    let response = await fetch(id_url);
+    let data = await response.json();
+    title_id = data.title_results[0].id;
 
     // use Watchman title id to get movie details 
     const info_url = `https://api.watchmode.com/v1/title/${title_id}/details/?apiKey=${process.env.API_KEY}`
-    fetch(info_url, { method: 'get' })
-        .then(res => res.json())
-        .then(data => {
-            title_name = data.title;
-            plot = data.plot_overview;
-        })
-        .catch(error => console.error("Fetch error", error));
+    response = await fetch(info_url);
+    data = await response.json();
+    title_name = data.title;
+    plot = data.plot_overview;
 
     const result = { title_name, plot }
     // add result to db
@@ -60,35 +55,30 @@ router.get("/streamingSourceSearch", (req, res) => {
 
 router.post("/streamingSourceSearch", async (req, res) => {
     const { title } = req.body;
-    let title_id, title_name, source_json;
+    let title_id, title_name;
     // get Watchman title id
     const id_url = `https://api.watchmode.com/v1/search/?apiKey=${process.env.API_KEY}&search_field=name&search_value=${title}`;
-    fetch(id_url, {method: 'get'})
-        .then(res => res.json())
-        .then(data => {
-            title_id = data.title_results[0]?.id;
-        })
-        .catch(error => console.error('Fetch error', error));
+    let response = await fetch(id_url);
+    let data = await response.json();
+    title_id = data.title_results[0].id;
+    title_name = data.name;
 
     // use Watchman title id to get movie details 
-    const info_url = `https://api.watchmode.com/v1/title/${title_id}/details/?apiKey=${process.env.API_KEY}`
-    fetch(info_url, { method: 'get' })
-        .then(res => res.json())
-        .then(data => {
-            title_name = data.title;
-            source_json = data.sources;
-        })
-        .catch(error => console.error("Fetch error", error));
+    const info_url = `https://api.watchmode.com/v1/title/${title_id}/sources/?apiKey=${process.env.API_KEY}`
+    console.log(info_url);
+    response = await fetch(info_url);
+    data = await response.json();
+    console.log(data);
 
     // list of objects containing source name and web url to watch on that source
-    let sources = [];
-    source_json.forEach(source => {
-        source_name = source.name;
-        source_url = source.web_url;
-        sources.push({ source_name, source_url });
-    })
+    // let sources = [];
+    // source_json.forEach(source => {
+    //     source_name = source.name;
+    //     source_url = source.web_url;
+    //     sources.push({ source_name, source_url });
+    // })
     // add result to db
-    const result = { title_name, sources };
+    const result = { title_name };
     try {
         await client.connect();
         await client
