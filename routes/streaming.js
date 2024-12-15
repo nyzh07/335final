@@ -46,7 +46,7 @@ router.post("/plotSearch", async (req, res) => {
             .collection(databaseAndCollection.collection)
             .insertOne(result);
             
-        res.render("plotResult", { result });
+        res.render("plotResult", { title_name, plot });
     } catch(e) {
         console.error(e);
     } finally {
@@ -54,11 +54,11 @@ router.post("/plotSearch", async (req, res) => {
     }
 });
 
-router.get("streamingSourceSearch", (req, res) => {
+router.get("/streamingSourceSearch", (req, res) => {
     res.render("streamingSourceSearch");
 })
 
-router.post("streamingSourceSearch", async (req, res) => {
+router.post("/streamingSourceSearch", async (req, res) => {
     const { title } = req.body;
     let title_id, title_name, source_json;
     // get Watchman title id
