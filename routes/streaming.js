@@ -86,7 +86,7 @@ router.post("/streamingSourceSearch", async (req, res) => {
             .collection(databaseAndCollection.collection)
             .insertOne(result);
             
-        res.render("streamingSourceResult", { result });
+        res.render("streamingSourceResult", { title_name });
     } catch(e) {
         console.error(e);
     } finally {
