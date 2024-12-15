@@ -60,25 +60,24 @@ router.post("/streamingSourceSearch", async (req, res) => {
     const id_url = `https://api.watchmode.com/v1/search/?apiKey=${process.env.API_KEY}&search_field=name&search_value=${title}`;
     let response = await fetch(id_url);
     let data = await response.json();
+    console.log(data);
     title_id = data.title_results[0].id;
-    title_name = data.name;
+    title_name = data.title_results[0].name;
 
     // use Watchman title id to get movie details 
     const info_url = `https://api.watchmode.com/v1/title/${title_id}/sources/?apiKey=${process.env.API_KEY}`
-    console.log(info_url);
     response = await fetch(info_url);
     data = await response.json();
-    console.log(data);
 
     // list of objects containing source name and web url to watch on that source
-    // let sources = [];
-    // source_json.forEach(source => {
-    //     source_name = source.name;
-    //     source_url = source.web_url;
-    //     sources.push({ source_name, source_url });
-    // })
+    let sources = [];
+    data.forEach(source => {
+        source_name = source.name;
+        source_url = source.web_url;
+        sources.push({ source_name, source_url });
+    })
     // add result to db
-    const result = { title_name };
+    const result = { title_name, sources };
     try {
         await client.connect();
         await client
@@ -86,7 +85,7 @@ router.post("/streamingSourceSearch", async (req, res) => {
             .collection(databaseAndCollection.collection)
             .insertOne(result);
             
-        res.render("streamingSourceResult", { title_name });
+        res.render("streamingSourceResult", { title_name, sources });
     } catch(e) {
         console.error(e);
     } finally {
@@ -105,5 +104,20 @@ router.get("/previousResults", async (req, res) => {
         await client.close();
     }
 });
+
+router.get("/clearResults", async (req, res) => {
+    try {
+        await client.connect();
+        await client
+            .db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .deleteMany({});
+        res.render("clearResults");
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+})
 
 module.exports = router;

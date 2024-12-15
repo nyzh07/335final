@@ -9,7 +9,13 @@
 <body>
 	<h1>Sources Found</h1>
     <strong>Movie Title: </strong><%- title_name %><br>
-    <strong>Sources: </strong><%- source_url %><br>
+    <strong>Sources: </strong>
+    <% sources.forEach(source => { %>
+        <div>
+            <strong>Name:</strong> <%= source.source_name %><br>
+            <strong>URL:</strong> <a href="<%= source.source_url %>"><%= source.source_url %></a><br>
+        </div>
+    <% }) %>
 
     <a href="/">HOME</a></li>
 </body>
