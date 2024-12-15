@@ -1,7 +1,4 @@
-// from summer camp server
-const express = require("express");
-const app = express();
-const path = require("path");
+
 
 let url = 'https://api.watchmode.com/v1/autocomplete-search/?apiKey=NlKLCbkH2zQ4gaDANv2oCC8TX5IPtwXcyDbmKfa0&search_value=Breaking%20bad&search_type=1';
 
@@ -11,12 +8,18 @@ fetch(url, { method: 'Get' })
         console.log(json);
     });
 
-const streamingRoutes = require("./routes/streaming");
+// from summer camp server
+// const express = require("express");
+// const app = express();
+// const path = require("path");
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "templates"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// const applicationRoutes = require("./routes/application");
+// const adminRoutes = require("./routes/admin");
+
+// app.set("view engine", "ejs");
+// app.set("views", path.join(__dirname, "templates"));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
 
 app.use("/", streamingRoutes);
 
