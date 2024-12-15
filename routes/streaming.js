@@ -9,7 +9,6 @@ const databaseAndCollection = {db: process.env.MONGO_DB_NAME, collection: proces
 
 // Router stuff
 const express = require("express");
-const { info } = require("console");
 const router = express.Router();
 
 router.get("/plotSearch", (req, res) => {
@@ -40,7 +39,6 @@ router.post("/plotSearch", async (req, res) => {
             .db(databaseAndCollection.db)
             .collection(databaseAndCollection.collection)
             .insertOne(result);
-            
         res.render("plotResult", { title_name, plot });
     } catch(e) {
         console.error(e);
@@ -60,7 +58,6 @@ router.post("/streamingSourceSearch", async (req, res) => {
     const id_url = `https://api.watchmode.com/v1/search/?apiKey=${process.env.API_KEY}&search_field=name&search_value=${title}`;
     let response = await fetch(id_url);
     let data = await response.json();
-    console.log(data);
     title_id = data.title_results[0].id;
     title_name = data.title_results[0].name;
 
@@ -71,20 +68,21 @@ router.post("/streamingSourceSearch", async (req, res) => {
 
     // list of objects containing source name and web url to watch on that source
     let sources = [];
+    let source_names = [];
     data.forEach(source => {
         source_name = source.name;
+        source_names.push(source_name);
         source_url = source.web_url;
         sources.push({ source_name, source_url });
     })
     // add result to db
-    const result = { title_name, sources };
+    const result = { title_name, source_names };
     try {
         await client.connect();
         await client
             .db(databaseAndCollection.db)
             .collection(databaseAndCollection.collection)
             .insertOne(result);
-            
         res.render("streamingSourceResult", { title_name, sources });
     } catch(e) {
         console.error(e);
@@ -96,8 +94,21 @@ router.post("/streamingSourceSearch", async (req, res) => {
 router.get("/previousResults", async (req, res) => {
     try {
         await client.connect();
-
-        res.render("previousResults", { results });
+        const cursor = client.db(databaseAndCollection.db)
+            .collection(databaseAndCollection.collection)
+            .find({});
+        const results = await cursor.toArray();
+        let plot_list = [];
+        let source_list = [];
+        results.forEach(result => {
+            if (result.plot != undefined) {
+                plot_list.push(result);
+            } else {
+                source_list.push(result);
+            }
+        })
+        console.log(plot_list);
+        res.render("previousResults", { plot_list, source_list });
     } catch (e) {
         console.error(e);
     } finally {
@@ -105,14 +116,18 @@ router.get("/previousResults", async (req, res) => {
     }
 });
 
-router.get("/clearResults", async (req, res) => {
+router.get("/clearResults", (req, res) => {
+    res.render("clearResults");
+})
+
+router.post("/clearResults", async (req, res) => {
     try {
         await client.connect();
         await client
             .db(databaseAndCollection.db)
             .collection(databaseAndCollection.collection)
             .deleteMany({});
-        res.render("clearResults");
+        res.render("clearResultsConfirmation");
     } catch (e) {
         console.error(e);
     } finally {
