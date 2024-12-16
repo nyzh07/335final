@@ -1,0 +1,82 @@
+body, html {
+    color: white;
+    font-family: Arial, sans-serif;
+
+    background-image: url(arcane.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Nav bar */
+.topnav {
+    background-color: rgba(40, 26, 74, 0.278);
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+.topnav a { /* Style nav bar links */
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.topnav a:hover {
+    background-color: rgba(79, 24, 219, 0.308);
+}
+
+.topnav a.active {
+    background-color: rgb(1, 18, 74);
+    color: white;
+}
+
+.container {
+    background-color: rgba(57, 14, 54, 0.499);
+    text-align: center;
+    padding: 50px 250px;
+    width: 80%;
+    max-width: 1200px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 25px;
+}
+
+.title {
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 16px;
+    background-color: #4585a0;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}
+
+.button:hover {
+    background-color: #272bb0;
+}

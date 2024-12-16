@@ -1,19 +1,24 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8"/>
         <title>Home</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     </head>
 
     <body>
-        <h1>Streaming Sites</h1>
-        <ul>
-            <li>Search for Summary: <a href="/plotSearch">Plot Summary</a></li><br>
-            <li>Search for Movie: <a href="/streamingSourceSearch">Sources</a></li><br>
-            <li>Search History: <a href="/previousResults">History</a></li><br>
-            <li>Clear Search History: <a href="/clearResults">Clear History</a></li><br>
-        </ul>
-        <hr>
-        <hr>
+        <div class="topnav">
+            <a href="/clearResults">Clear History</a>
+            <a href="/previousResults">History</a>
+            <a class="active" href="/">Home</a>
+        </div>
+
+        <div class="container">
+            <h1 class="title">Media Services</h1>
+            <div class="button-container">
+                <a href="/plotSearch" class="button">Summary</a>
+                <a href="/streamingSourceSearch" class="button">Sources</a>
+            </div>
+        </div>
     </body>
 </html>

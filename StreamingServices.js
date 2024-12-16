@@ -4,10 +4,12 @@ const path = require("path");
 
 const streamingRoutes = require("./routes/streaming");
 
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "templates"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 app.use("/", streamingRoutes);
 
