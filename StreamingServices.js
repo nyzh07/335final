@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-let portNumber;
+let portNumber = 5000;
 
 if (process.argv.length == 3) {
     portNumber = process.argv[2];
