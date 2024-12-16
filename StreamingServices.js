@@ -17,14 +17,14 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-let portNumber = 5000;
+let portNumber = 5001;
 
-if (process.argv.length == 3) {
-    portNumber = process.argv[2];
-} else {
-    console.log(`Usage: ${process.argv[1]}'portNumber`);
-    process.exit(1);
-} 
+// if (process.argv.length == 3) {
+//     portNumber = process.argv[2];
+// } else {
+//     console.log(`Usage: ${process.argv[1]}'portNumber`);
+//     process.exit(1);
+// } 
 
 app.listen(portNumber);
 console.log(`Web server started and running at http://localhost:${portNumber}`);
