@@ -6,7 +6,7 @@
 
 **App Description:** Allow users to search up the plot overview or streaming sources for a movie or TV show by its title and store the results.
 
-**YouTube Video Link:** https://youtu.be/nIg9vYMHIkQ
+**YouTube Video Link:** https://youtu.be/cay6dIdfQ5I
 
 **APIs:** Watchmode API (https://api.watchmode.com/)
 
