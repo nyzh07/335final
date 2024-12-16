@@ -9,15 +9,16 @@
 
 <body>
     <%- include('navbar') %>
-	<h1>Sources Found</h1>
-    <strong>Show/Movie Title: </strong><%- title_name %><br>
-    <strong>Sources: </strong>
-    <% sources.forEach(source => { %>
-        <div>
-            <strong>Name:</strong> <%= source.source_name %><br>
-            <strong>URL:</strong> <a href="<%= source.source_url %>"><%= source.source_url %></a><br>
-        </div>
-    <% }) %>
+    <div class="sourceContainer">
+        <h1>Sources Found</h1>
+        <span class="media"><strong>Show/Movie: </strong><%- title_name %></span><br>
+        <% sources.forEach(source => { %>
+            <div>
+                <strong>Name:</strong> <%= source.source_name %><br>
+                <strong>URL:</strong> <a href="<%= source.source_url %>"><%= source.source_url %></a><br>
+            </div>
+        <% }) %>
+    </div>
 </body>
 
 </html>

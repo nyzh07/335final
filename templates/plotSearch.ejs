@@ -8,10 +8,12 @@
 
     <body>
         <%- include('navbar') %>
-        <h1>Plot Search </h1>
-        <form action="/plotSearch" method="post"> 
-            <label><strong>Show/Movie Title: </strong><input type="text" name="title" id="title_name"/></label>
-            <input type="submit" value="Submit">
-        </form>
+        <div class="container">
+            <h1>Plot Search </h1>
+            <form action="/plotSearch" method="post"> 
+                <label><strong>Show/Movie Title: </strong><input type="text" name="title" id="title_name"/></label>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </body>
 </html>

@@ -8,10 +8,12 @@
 
     <body>
         <%- include('navbar') %>
+        <div class="container">
         <h1>Source Search</h1>
-        <form action="/streamingSourceSearch" method="post">
-            <label><strong>Show/Movie Title: </strong><input type="text" name="title" id="title_name"/></label>
-            <input type="submit">
-        </form>
+            <form action="/streamingSourceSearch" method="post">
+                <label><strong>Show/Movie Title: </strong><input type="text" name="title" id="title_name"/></label>
+                <input type="submit">
+            </form>
+        </div>
     </body>
 </html>

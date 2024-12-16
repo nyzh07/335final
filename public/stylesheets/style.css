@@ -1,7 +1,6 @@
 body, html {
     color: white;
     font-family: Arial, sans-serif;
-
     background-image: url(arcane.jpg);
     background-size: cover;
     background-position: center;
@@ -80,4 +79,67 @@ body, html {
 
 .button:hover {
     background-color: #272bb0;
+}
+
+/* search pages */
+input[type="submit"] {
+    padding: 14px;
+    font-size: 16px;
+    margin: 15px;
+    background-color: #4585a0;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+}
+
+.plotContainer {
+    background-color: rgba(57, 14, 54, 0.499);
+    text-align: center;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.sourceContainer h1 {
+    text-align: center;
+}
+
+.sourceContainer media {
+    display: inline-block;
+}
+
+.sourceContainer {
+    background-color: rgba(57, 14, 54, 0.499);
+    position: absolute;
+    text-align: left;
+    top: 100px;
+    width: 80%;
+    max-width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    overflow-y: auto;
+}
+
+.sourceContainer div {
+    border-bottom: 1px solid #fff;
+    margin-top: 10px;
+}
+
+.sourceContainer a {
+    color: #4c92d1;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.sourceContainer a:hover {
+    text-decoration: underline;
 }
