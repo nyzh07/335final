@@ -4,57 +4,58 @@
 <head>
     <meta charset="utf-8" />
     <title>History</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 </head>
 
 <body>
-    <h1>Search History</h1>
-    <!-- Table for Sources -->
-    <% if (source_list.length > 0) { %>
+    <%- include('navbar') %>
+        <div class="plotContainer">
+            <h1>Search History</h1>
+            <!-- Table for Plots -->
+            <h2>Plots</h2>
+            <% if (plot_list.length> 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Show/Movie Name</th>
+                            <th>Plot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% plot_list.forEach(plot=> { %>
+                            <tr>
+                                <td><%- plot.title_name %></td>
+                                <td><%- plot.plot %></td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } else { %>
+                    <p>No plots available.</p>
+                <% } %>
+
         <h2>Sources</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Show/Movie Name</th>
-                    <th>Source Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% source_list.forEach(source => { %>
-                    <tr>
-                        <td><%- source.title_name %></td>
-                        <td><%- source.source_names %></td>
-                    </tr>
+            <% if (source_list.length> 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Show/Movie Name</th>
+                            <th>Source Name</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                <% source_list.forEach(source=> { %>
+                        <tr>
+                            <td><%- source.title_name %></td>
+                            <td><%- source.source_names %></td>
+                        </tr>
                 <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-        <p>No sources available.</p>
-    <% } %>
-
-    <!-- Table for Plots -->
-    <% if (plot_list.length > 0) { %>
-        <h2>Plots</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Show/Movie Name</th>
-                    <th>Plot</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% plot_list.forEach(plot => { %>
-                    <tr>
-                        <td><%- plot.title_name %></td>
-                        <td><%- plot.plot %></td>
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-        <p>No plots available.</p>
-    <% } %>
-
-    <a href="/">HOME</a>
+                </tbody>
+                </table>
+                <% } else { %>
+                    <p>No sources available.</p>
+                <% } %>
+        </div>
 </body>
 
 </html>
