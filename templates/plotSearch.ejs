@@ -3,16 +3,15 @@
     <head>
         <meta charset="utf-8" />
         <title>Plot</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     </head>
 
     <body>
-        <h1>Plot Search: </h1>
+        <%- include('navbar') %>
+        <h1>Plot Search </h1>
         <form action="/plotSearch" method="post"> 
             <label><strong>Show/Movie Title: </strong><input type="text" name="title" id="title_name"/></label>
-            <br>
-            <input type="reset" value = "Reset">
-            <input type="submit" value="Submit"><hr>
-            <a href="/">HOME</a></li>
+            <input type="submit" value="Submit">
         </form>
     </body>
 </html>

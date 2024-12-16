@@ -4,9 +4,11 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Source Info</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 </head>
 
 <body>
+    <%- include('navbar') %>
 	<h1>Sources Found</h1>
     <strong>Show/Movie Title: </strong><%- title_name %><br>
     <strong>Sources: </strong>
@@ -16,8 +18,6 @@
             <strong>URL:</strong> <a href="<%= source.source_url %>"><%= source.source_url %></a><br>
         </div>
     <% }) %>
-
-    <a href="/">HOME</a></li>
 </body>
 
 </html>
